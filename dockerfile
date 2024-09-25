@@ -6,4 +6,4 @@ COPY . /app
 
 EXPOSE 8080
 
-CMD [ "/usr/local/bin/sing-box", "run", "-c", "/app/conf/config.json", "-C", "/app/conf/conf" ]
+CMD [ "run", "-c", "/app/conf/config.json", "-C", "/app/conf/conf" ]
