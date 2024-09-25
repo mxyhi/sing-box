@@ -14,8 +14,8 @@
       "tls": {
         "enabled": true,
         "alpn": ["h3"],
-        "key_path": "../tls/tls.key",
-        "certificate_path": "../tls/tls.cer"
+        "key_path": "/app/conf/tls/tls.key",
+        "certificate_path": "/app/conf/tls/tls.cer"
       }
     }
   ]
