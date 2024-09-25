@@ -6,4 +6,6 @@ COPY . /app
 
 EXPOSE 8080
 
-CMD [ "run", "-c", "/app/conf/config.json", "-C", "/app/conf/conf" ]
+ENTRYPOINT [ "bash" ]
+
+CMD ["./start.sh"]
