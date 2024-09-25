@@ -1,0 +1,22 @@
+{
+  "inbounds": [
+    {
+      "tag": "tuic-8080.json",
+      "type": "tuic",
+      "listen": "::",
+      "listen_port": 8080,
+      "users": [
+        {
+          "uuid": "5a236341-b55d-46a4-a049-3ae73a288dcb"
+        }
+      ],
+      "congestion_control": "bbr",
+      "tls": {
+        "enabled": true,
+        "alpn": ["h3"],
+        "key_path": "../tls/tls.key",
+        "certificate_path": "../tls/tls.cer"
+      }
+    }
+  ]
+}

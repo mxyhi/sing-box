@@ -1,11 +1,7 @@
-FROM ubuntu:22.04 AS base
+FROM gzxhwq/sing-box:latest AS base
 
 WORKDIR /app
 
-RUN apt update
+COPY . /app
 
-RUN apt install -y curl wget
-
-RUN bash -c 'PORT=80 bash <(curl -Ls https://00.2go.us.kg/tu.sh)'
-
-CMD [ "bash" ]
+CMD [ "bash -c '/var/lib/sing-box run -c /app/conf/config.json -C /app/conf/conf'" ]

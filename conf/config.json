@@ -1,0 +1,21 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {},
+  "ntp": {
+    "enabled": true,
+    "server": "time.apple.com"
+  },
+  "outbounds": [
+    {
+      "tag": "direct",
+      "type": "direct"
+    },
+    {
+      "tag": "block",
+      "type": "block"
+    }
+  ]
+}
