@@ -1,4 +1,4 @@
-FROM gzxhwq/sing-box:latest AS base
+FROM ghcr.io/sagernet/sing-box:latest AS base
 
 WORKDIR /app
 
@@ -6,6 +6,6 @@ COPY . /app
 
 EXPOSE 8080
 
-ENTRYPOINT [ "bash" ]
+ENTRYPOINT [ "/bin/bash", "-c" ]
 
-CMD ["./start.sh"]
+CMD ["chmod 777 ./start.sh && ./start.sh"]

@@ -1,7 +1,10 @@
+#!/bin/bash
+
+source /app/config
 echo $'{
   "inbounds": [
     {
-      "tag": "tuic-8080.json",
+      "tag": "tuic",
       "type": "tuic",
       "listen": "::",
       "listen_port": '$TUIC_PORT',
@@ -29,14 +32,32 @@ _wget() {
 }
 
 get_ip() {
-    export "$(_wget -4 -qO- https://one.one.one.one/cdn-cgi/trace | grep ip=)" &>/dev/null
-    [[ -z $ip ]] && export "$(_wget -6 -qO- https://one.one.one.one/cdn-cgi/trace | grep ip=)" &>/dev/null
+    # 尝试获取 IPv4 地址
+    ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
+
+    # 如果 IPv4 地址为空，则尝试获取 IPv6 地址
+    if [[ -z "$ip" ]]; then
+        ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
+    fi
+
+    # 输出 IP 地址
+    if [[ -n "$ip" ]]; then
+        echo "Your public IP address is: $ip"
+    else
+        echo "Failed to retrieve public IP address."
+    fi
 }
 
 get_ip
 
 is_addr=$ip
 
+echo "url:"
+
+echo ""
+
 echo "tuic://$TUIC_USER_UUID:@$is_addr:$TUIC_PORT?alpn=h3&allow_insecure=1&congestion_control=bbr#tuic-$is_addr"
+
+echo ""
 
 /usr/local/bin/sing-box run -c /app/conf/config.json -C /app/conf/conf
