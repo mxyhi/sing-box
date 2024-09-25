@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source /app/config
 echo $'{
   "inbounds": [
     {
@@ -27,25 +26,25 @@ echo $'{
 }' >/app/conf/conf/tuic.json
 
 _wget() {
-    [[ $proxy ]] && export https_proxy=$proxy
-    wget --no-check-certificate $*
+  [[ $proxy ]] && export https_proxy=$proxy
+  wget --no-check-certificate $*
 }
 
 get_ip() {
-    # 尝试获取 IPv4 地址
+  # 尝试获取 IPv4 地址
+  ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
+
+  # 如果 IPv4 地址为空，则尝试获取 IPv6 地址
+  if [[ -z "$ip" ]]; then
     ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
+  fi
 
-    # 如果 IPv4 地址为空，则尝试获取 IPv6 地址
-    if [[ -z "$ip" ]]; then
-        ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
-    fi
-
-    # 输出 IP 地址
-    if [[ -n "$ip" ]]; then
-        echo "Your public IP address is: $ip"
-    else
-        echo "Failed to retrieve public IP address."
-    fi
+  # 输出 IP 地址
+  if [[ -n "$ip" ]]; then
+    echo "Your public IP address is: $ip"
+  else
+    echo "Failed to retrieve public IP address."
+  fi
 }
 
 get_ip
