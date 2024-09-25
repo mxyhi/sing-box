@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . /app
 
-EXPOSE 8080
-
 ENTRYPOINT [ "/bin/bash", "-c" ]
 
 CMD ["chmod 777 ./start.sh && ./start.sh"]
