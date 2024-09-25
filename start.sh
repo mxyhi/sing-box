@@ -31,15 +31,12 @@ _wget() {
 }
 
 get_ip() {
-  # 尝试获取 IPv4 地址
   ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
 
-  # 如果 IPv4 地址为空，则尝试获取 IPv6 地址
   if [[ -z "$ip" ]]; then
     ip=$(wget -qO- https://one.one.one.one/cdn-cgi/trace | grep ip= | cut -d= -f2)
   fi
 
-  # 输出 IP 地址
   if [[ -n "$ip" ]]; then
     echo "Your public IP address is: $ip"
   else
@@ -49,13 +46,13 @@ get_ip() {
 
 get_ip
 
-is_addr=$ip
+echo ""
 
 echo "url link is:"
 
 echo ""
 
-echo "tuic://$TUIC_USER_UUID:$TUIC_USER_PWD@$is_addr:$TUIC_PORT?alpn=h3&allow_insecure=1&congestion_control=bbr#tuic-$is_addr"
+echo "tuic://$TUIC_USER_UUID:$TUIC_USER_PWD@$ip:$TUIC_PORT?alpn=h3&allow_insecure=1&congestion_control=bbr#tuic-$ip"
 
 echo ""
 
