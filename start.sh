@@ -51,11 +51,11 @@ get_ip
 
 is_addr=$ip
 
-echo "url:"
+echo "url link is:"
 
 echo ""
 
-echo "tuic://$TUIC_USER_UUID:@$is_addr:$TUIC_PORT?alpn=h3&allow_insecure=1&congestion_control=bbr#tuic-$is_addr"
+echo "tuic://$TUIC_USER_UUID:$TUIC_USER_PWD@$is_addr:$TUIC_PORT?alpn=h3&allow_insecure=1&congestion_control=bbr#tuic-$is_addr"
 
 echo ""
 
